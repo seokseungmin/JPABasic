@@ -18,25 +18,29 @@ public class JpaMain {
 
         try {
 
-            //Member member = new Member(201L, "member300");
+            Member member = new Member();
+            member.setUsername("C");
+
+            em.persist(member);
+            //Member member = new Member(10L, "member100");
             //em.persist(member);
             //DB에 반영되기전(커밋전)에 미리좀 보고 싶을때 강제로 하는행동
             //em.flush();
 
             //변경감지
             //만약 캐시에 없으면 DB에서 가져와서 캐시에 영속 상태로 만듬.
-            Member member = em.find(Member.class, 150L);
-            member.setName("AAAAA");
+            //Member member = em.find(Member.class, 150L);
+            //member.setName("AAAAA");
 
             //준영속 JPA가 더이상 관리를 안함. 커밋해도 변화가 없음!
             //em.detach(member);
 
             //영속성 컨텍스트 통으로 날려버림 이때도 준영속이랑 비슷한!
-            em.clear();
-            Member member1 = em.find(Member.class, 150L);
+            //em.clear();
+            //Member member1 = em.find(Member.class, 150L);
             //em.persist(member);
 
-            System.out.println("====================");
+            //System.out.println("====================");
 
             //객체를 생성한 상태(비영속), JPA와 관련도 없고 DB에 들어가지도 않음.
             //Member member = new Member();
