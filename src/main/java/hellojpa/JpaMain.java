@@ -18,10 +18,33 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUsername("C");
+            //저장
+            Team team = new Team();
+            team.setName("TeamA");
+            //team.getMembers().add(member);
+            em.persist(team);
 
+            Member member = new Member();
+            member.setUsername("member1");
             em.persist(member);
+
+            team.addMember(member);
+
+
+
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+
+            List<Member> members = findMember.getTeam().getMembers();
+            for (Member m : members) {
+                System.out.println("m = " + m.getUsername());
+            }
+            //Member member = new Member();
+            //member.setUsername("C");
+
+            //em.persist(member);
             //Member member = new Member(10L, "member100");
             //em.persist(member);
             //DB에 반영되기전(커밋전)에 미리좀 보고 싶을때 강제로 하는행동
